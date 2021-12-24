@@ -1,19 +1,39 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+//Creates License Section of Readme
+function renderLicenseSection(license) {
+  //Returns 'empty' if no License selected
+  if(license === 'None') return ``;
 
-function renderLicenseBadge(license) {
-
+  //Returns License Section - based on user selection
+  return `
+  ## License
+  The application is covered under the ${license} license.
+  ![Badge](https://img.shields.io/badge/License-${license}-blue.svg)
+  `;
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
+//Creates Collaborators Section of Readme
+function renderCollaborators(data){
+  //Returns 'empty' if user chose not to list any 
+  if(!data.confirmCollaborators) return ``;
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
+  //Returns Collaborators Section - based on users input
+  return `
+  ## Collaborators
+  ${data.collborators}`;
+}
 
-// TODO: Create a function to generate markdown for README
+//Creates Tests Section of Readme
+function renderTests(data){
+  //Returns 'empty' if user chose no tests
+  if(!data.confirmTests) return ``;
+
+  //Returns Tests Section - based on users input
+  return `
+  ## Tests
+  ${data.tests}`;
+}
+
+//Creates Readme layout with conditional formating based on user input
 function generateMarkdown(data) {
   return `# ${data.title}
   ![Github licence](https://img.shield.io/badge/license-${data.license}-blue.svg)
@@ -26,13 +46,9 @@ function generateMarkdown(data) {
   ${data.install}
   ## Usage
   ${data.usage}
-  ## License
-  The application is covered under the ${data.license} license.
-  ${badge(data.license)}
-  ## Tests
-  ${data.tests}
-  ## Collaborators
-  ${data.collaborators}
+  ${renderLicenseSection(data.license)}
+  ${renderTests(data)}
+  ${renderCollaborators(data)}
   ## Questions
   If you have any questions about this project, please contact me directly at ${data.email}.
   You can view more of my projects at https://github.com/${data.github}.
