@@ -10,32 +10,6 @@ const promptUser = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'title',
-            message: 'What is the Title of your Project? (Required)',
-            validate: titleInput =>{
-                if(titleInput) {
-                    return true;
-                } else {
-                    console.log('Please enter a Title for you Project!');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'description',
-            message: 'Describe your Project (Required)',
-            validate: descriptionInput =>{
-                if(descriptionInput) {
-                    return true;
-                } else {
-                    console.log('Please enter a Description for your Project!');
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
             name: 'github',
             message: 'Enter your GitHub Username (Required)',
             validate: githubInput =>{
@@ -60,6 +34,33 @@ const promptUser = () => {
                 }
             }
         },
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What is the Title of your Project? (Required)',
+            validate: titleInput =>{
+                if(titleInput) {
+                    return true;
+                } else {
+                    console.log('Please enter a Title for you Project!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'description',
+            message: 'Describe your Project (Required)',
+            validate: descriptionInput =>{
+                if(descriptionInput) {
+                    return true;
+                } else {
+                    console.log('Please enter a Description for your Project!');
+                    return false;
+                }
+            }
+        },
+        
         {
             type: 'input',
             name: 'install',
