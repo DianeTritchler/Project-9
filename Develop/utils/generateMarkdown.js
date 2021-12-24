@@ -1,3 +1,5 @@
+const { cond } = require("lodash");
+
 //Creates License Section of Readme
 function renderLicenseSection(license) {
   //Returns 'empty' if no License selected
@@ -7,6 +9,7 @@ function renderLicenseSection(license) {
   return `
   ## License
   The application is covered under the ${license} license.
+
   ![Badge](https://img.shields.io/badge/License-${license}-blue.svg)
   `;
 }
@@ -19,7 +22,7 @@ function renderCollaborators(data){
   //Returns Collaborators Section - based on users input
   return `
   ## Collaborators
-  ${data.collborators}`;
+  ${data.collaborators} `;
 }
 
 //Creates Tests Section of Readme
@@ -33,14 +36,37 @@ function renderTests(data){
   ${data.tests}`;
 }
 
+function renderTableContents(data){
+  let conditionalTableData = ``;
+  if(data.license != 'None'){
+    conditionalTableData = conditionalTableData + `* License
+    ß`;
+  }
+  
+  if(data.confirmCollaborators){
+    conditionalTableData = conditionalTableData + `* Collaborators
+    `;
+  }
+
+  if(data.confirmTests){
+    conditionalTableData = conditionalTableData + `* Tests
+    `;
+  }
+  
+  return conditionalTableData;
+}
+
 //Creates Readme layout with conditional formating based on user input
 function generateMarkdown(data) {
   return `# ${data.title}
-  ![Github licence](https://img.shield.io/badge/license-${data.license}-blue.svg)
+  ![Github licence](https://img.shields.io/badge/license-${data.license}-blue.svg)
   ## Description
   ${data.description}
   ## Table of Contents
-  * ???
+  * Installation
+  * Usage
+  ${renderTableContents(data)}
+  * Questions
 
   ## Installation
   ${data.install}

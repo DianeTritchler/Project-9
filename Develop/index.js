@@ -3,8 +3,6 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const generateReadme = require('./utils/generateMarkdown');
 
-console.log("Test"); //Testing
-
 // Propts users with questions about their project
 const promptUser = () => {
     return inquirer.prompt([
@@ -51,7 +49,7 @@ const promptUser = () => {
             type: 'input',
             name: 'description',
             message: 'Describe your Project (Required)',
-            validate: descriptionInput =>{
+            validate: descriptionInput => {
                 if(descriptionInput) {
                     return true;
                 } else {
@@ -65,11 +63,24 @@ const promptUser = () => {
             type: 'input',
             name: 'install',
             message: 'What are the steps required to install your project? (Required)',
-            validate: installInput =>{
+            validate: installInput => {
                 if(installInput) {
                     return true;
                 } else {
                     console.log('Please provide the steps to install your project!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'usage',
+            message: 'Provide examples and instructions for use of this project (Required)',
+            validate: usageInput => {
+                if(usageInput) {
+                    return true;
+                } else{
+                    console.log('Please provide information for usage!');
                     return false;
                 }
             }
@@ -102,7 +113,7 @@ const promptUser = () => {
             type: 'list',
             name: 'license',
             message: 'Choose a license for your project.',
-            choice:[ 'None','MIT','GNU-AGPLv3', 'GNU-LGPLv3', 'Mozilla-Public-License-2.0', 
+            choices:[ 'None','MIT','GNU-AGPLv3', 'GNU-LGPLv3', 'Mozilla-Public-License-2.0', 
                 'Apache-License-2.0', 'Boost-Software-License-1.0', 'GNU-GPLv3' ]
         }
     ]);
@@ -114,7 +125,6 @@ const writeFile = data => {
         //Checks for Error
         if(err){
             console.log(err);
-            throw err;
         }
         else{
             console.log("Your README has been created! Check out README.md");
